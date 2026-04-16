@@ -8,7 +8,7 @@
       <div class="hidden md:flex items-center gap-8">
         <a href="#hero" class="text-gray-700 text-md hover:text-white transition">Beranda</a>
         <a href="#tool" class="text-gray-700 text-md hover:text-white transition">Sejarah</a>
-        <a href="#tool" class="text-gray-700 text-md hover:text-white transition">Visi Misi</a>
+        <a href="#tool" class="text-gray-700 text-md hover:text-white transition">Visualisasi</a>
         <a href="#tool" class="text-gray-700 text-md hover:text-white transition">Struktur</a>
         <a href="#about" class="text-gray-700 text-md hover:text-white transition">Tentang</a>
       </div>
