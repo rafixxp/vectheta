@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, onBeforeMount, nextTick, ref, watch, computed } from 'vue'
+import katex from 'katex'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
@@ -63,7 +64,7 @@ const updateAll = () => {
   const magA = vecA.length()
   const magB = vecB.length()
 
-  dotProduct.value = dot.toFixed(2)
+  dotProduct.value = dot.toFixed(0)
 
   if (magA === 0 || magB === 0) {
     angle.value = 0
@@ -116,6 +117,25 @@ const handleResize = () => {
   camera.updateProjectionMatrix()
   renderer.setSize(threeContainer.value.clientWidth, threeContainer.value.clientHeight)
 }
+
+const mathExplained = computed(() => {
+  const formula = `
+  \\vec{a}.\\vec{b} = (Ax.Bx)+(Ay.By)+(Az.Bz) \\\\[0.5em]
+  \\vec{a}.\\vec{b} = (${vectorA.value.x} \\times ${vectorB.value.x}) + (${vectorA.value.y} \\times ${vectorB.value.y}) + (${vectorA.value.z} \\times ${vectorB.value.z}) = ${dotProduct.value} \\\\[1.5em]
+
+  |\\vec{a}| = \\sqrt{${vectorA.value.x}^2 + ${vectorA.value.y}^2 + ${vectorA.value.z}^2} = ${Math.sqrt(vectorA.value.x**2 + vectorA.value.y**2 + vectorA.value.z**2).toFixed()} \\\\[0.5em]
+
+  |\\vec{b}| = \\sqrt{${vectorB.value.x}^2 + ${vectorB.value.y}^2 + ${vectorB.value.z}^2} = ${Math.sqrt(vectorB.value.x**2 + vectorB.value.y**2 + vectorB.value.z**2).toFixed()} \\\\[1.5em]
+
+  \\vec{a}.\\vec{b} = |\\vec{a}|.|\\vec{b}| \\cos \\theta \\\\[0.5em]
+  \\cos \\theta = \\frac{\\vec{a}.\\vec{b}}{|\\vec{a}|.|\\vec{b}|} \\\\[0.5em]
+
+  `
+  return katex.renderToString(formula, {
+    displayMode: false,
+    throwOnError: false,
+  })
+})
 
 watch([vectorA, vectorB], updateAll, { deep: true })
 
@@ -250,9 +270,9 @@ onBeforeMount(() => {
       </div>
 
       <div class="grid lg:gird-cols-12 sm:grid-cols-1 border border-gray-300 p-2 rounded-2xl mt-6">
-        <div class="bg-white backdrop-blur-md px-3 py-4">
+        <div class="bg-white backdrop-blur-md px-3 py-3">
           <span class="fas fa-square-root-variable text-xs font-semibold"></span><span class="text-xs ms-2 text-gray-700">Contoh penulisan matematis</span>
-          <div v-html="mathExplained"></div>
+          <div class="mt-4" v-html="mathExplained"></div>
         </div>
       </div>
     </div>
