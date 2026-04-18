@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onBeforeMount, nextTick, ref, watch } from 'vue'
+import { onMounted, onBeforeMount, nextTick, ref, watch, computed } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
@@ -26,7 +26,7 @@ const init = async () => {
     scene.background = new THREE.Color(0xffffff)
   
     camera = new THREE.PerspectiveCamera(90, container.clientWidth / container.clientHeight, 0.1, 1000)
-    camera.position.set(8, 8, 8)
+    camera.position.set(8, 4, 6)
   
     renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(container.clientWidth, container.clientHeight)
@@ -38,7 +38,7 @@ const init = async () => {
     controls.dampingFactor = 0.08
   
     scene.add(new THREE.AxesHelper(7))
-    scene.add(new THREE.GridHelper(9, 10, 0x64748b, 0x0efff))
+    scene.add(new THREE.GridHelper(2, 2, 0x64748b, 0x0efff))
   
     animate()
     updateAll()
@@ -246,6 +246,13 @@ onBeforeMount(() => {
               <p class="text-xs text-gray-700">Drag untuk memutar • Scroll untuk zoom</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="grid lg:gird-cols-12 sm:grid-cols-1 border border-gray-300 p-2 rounded-2xl mt-6">
+        <div class="bg-white backdrop-blur-md px-3 py-4">
+          <span class="fas fa-square-root-variable text-xs font-semibold"></span><span class="text-xs ms-2 text-gray-700">Contoh penulisan matematis</span>
+          <div v-html="mathExplained"></div>
         </div>
       </div>
     </div>

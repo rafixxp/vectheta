@@ -3,7 +3,7 @@
     <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-6 h-6 bg-black rounded flex items-center justify-center text-white font-bold text-xl">•</div>
-        <span class="text-2xl font-semibold tracking-tighter">Vector</span>
+        <span class="text-2xl font-semibold tracking-tighter">Vectheta</span>
       </div>
       <div class="hidden md:flex items-center gap-8">
         <a href="#hero" class="text-gray-700 text-md hover:text-white transition">Beranda</a>
