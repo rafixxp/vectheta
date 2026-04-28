@@ -39,7 +39,7 @@ const init = async () => {
     controls.dampingFactor = 0.08
   
     scene.add(new THREE.AxesHelper(7))
-    scene.add(new THREE.GridHelper(2, 2, 0x64748b, 0x0efff))
+    scene.add(new THREE.GridHelper(4, 4, 0x64748b, 0x0efff))
   
     animate()
     updateAll()
@@ -87,7 +87,7 @@ const updateAll = () => {
   } else {
     arrowA.setDirection(vecA.clone().normalize())
     arrowA.setLength(Math.max(magA, 1))
-  }
+  }                                                                                 
 
   if (!arrowB) {
     arrowB = new THREE.ArrowHelper(
@@ -129,7 +129,6 @@ const mathExplained = computed(() => {
 
   \\vec{a}.\\vec{b} = |\\vec{a}|.|\\vec{b}| \\cos \\theta \\\\[0.5em]
   \\cos \\theta = \\frac{\\vec{a}.\\vec{b}}{|\\vec{a}|.|\\vec{b}|} \\\\[0.5em]
-
   `
   return katex.renderToString(formula, {
     displayMode: false,
