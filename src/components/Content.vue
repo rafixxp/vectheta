@@ -124,19 +124,22 @@ const handleResize = () => {
 const mathExplained = computed(() => {
   const formula = `
   \\begin{aligned}
-  a \\cdot b &= (a_x \\cdot b_x) + (a_y \\cdot b_y) + (a_z \\cdot b_z) \\\\[0.5em]
-  &= (${vectorA.value.x} \\cdot ${vectorB.value.x}) + (${vectorA.value.y} \\cdot ${vectorB.value.y}) + (${vectorA.value.z} \\cdot ${vectorB.value.z}) \\\\[0.5em]
-  &= ${parseFloat(vectorA.value.x) * parseFloat(vectorB.value.x)} + ${parseFloat(vectorA.value.y) * parseFloat(vectorB.value.y)} + ${parseFloat(vectorA.value.z) * parseFloat(vectorB.value.z)} \\\\[0.5em]
+  a \\cdot b &= (a_x \\cdot b_x) + (a_y \\cdot b_y) + (a_z \\cdot b_z) \\\\
+  &= (${vectorA.value.x} \\cdot ${vectorB.value.x}) + (${vectorA.value.y} \\cdot ${vectorB.value.y}) + (${vectorA.value.z} \\cdot ${vectorB.value.z}) \\\\
+  &= ${parseFloat(vectorA.value.x) * parseFloat(vectorB.value.x)} + ${parseFloat(vectorA.value.y) * parseFloat(vectorB.value.y)} + ${parseFloat(vectorA.value.z) * parseFloat(vectorB.value.z)} \\\\
   &= ${parseFloat(vectorA.value.x) * parseFloat(vectorB.value.x) + parseFloat(vectorA.value.y) * parseFloat(vectorB.value.y) + parseFloat(vectorA.value.z) * parseFloat(vectorB.value.z)} \\\\[1em]
+
+  |a| \\cdot |b| &=  \\sqrt{ax^2 + ay^2 + az^2} \\cdot \\sqrt{bx^2 + by^2 + bz^2} \\\\
+  &= \\sqrt{(${vectorA.value.x})^2 + (${vectorA.value.y})^2 + (${vectorA.value.z})^2} \\cdot \\sqrt{(${vectorB.value.x})^2 + (${vectorB.value.y})^2 + (${vectorB.value.z})^2} \\\\
+  &= \\sqrt{${parseFloat(vectorA.value.x) ** 2} + ${parseFloat(vectorA.value.y) ** 2} + ${parseFloat(vectorA.value.z) ** 2}} \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2} + ${parseFloat(vectorB.value.y) ** 2} + ${parseFloat(vectorB.value.z) ** 2}} \\\\
+  &= \\sqrt{${parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2}} \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2}} \\\\
+  &= ${Math.sqrt(parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2)} \\cdot ${Math.sqrt(parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2)} \\\\
+  &= ${(Math.sqrt(parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2) * Math.sqrt(parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2))} \\\\[1em]
   
-  |a| \\cdot |b| &= \\sqrt{(${vectorA.value.x})^2 + (${vectorA.value.y})^2 + (${vectorA.value.z})^2} \\cdot \\sqrt{(${vectorB.value.x})^2 + (${vectorB.value.y})^2 + (${vectorB.value.z})^2} \\\\[0.5em]
-  &= \\sqrt{${parseFloat(vectorA.value.x) ** 2} + ${parseFloat(vectorA.value.y) ** 2} + ${parseFloat(vectorA.value.z) ** 2}} \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2} + ${parseFloat(vectorB.value.y) ** 2} + ${parseFloat(vectorB.value.z) ** 2}} \\\\[0.5em]
-  &= \\sqrt{${parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2}} \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2}} \\\\[1.5em]
-  
-  \\cos \\theta &= \\frac{a \\cdot b}{|a||b|} \\\\[1em]
-  &= \\frac{${dotProduct.value}}{\\sqrt{${parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2} } \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2}}} \\\\[1.5em]
-  &= \\frac{${dotProduct.value}}{${(Math.sqrt(parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2) * Math.sqrt(parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2)).toFixed(0)}} \\\\[1em]
-  &= ${(dotProduct.value / (Math.sqrt(parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2) * Math.sqrt(parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2))).toFixed(0)}
+  \\cos \\theta &= \\frac{a \\cdot b}{|a||b|} \\\\[1.5em]
+  &= \\frac{${dotProduct.value}}{\\sqrt{${parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2}} \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2}}} \\\\[1em]
+  &= \\frac{${dotProduct.value}}{${(Math.sqrt(parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2) * Math.sqrt(parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2))}}
+
   \\end{aligned}
   `
   return katex.renderToString(formula, {
@@ -279,7 +282,7 @@ onBeforeMount(() => {
 
       <div class="grid lg:gird-cols-12 sm:grid-cols-1 border border-gray-300 p-2 rounded-2xl mt-6">
         <div class="bg-white backdrop-blur-md px-3 py-3">
-          <span class="fas fa-square-root-variable text-xs font-semibold"></span><span class="text-xs ms-2 text-gray-700">Contoh penulisan matematis</span>
+          <span class="fas fa-square-root-variable text-sm font-semibold"></span><span class="text-xs ms-2 text-gray-700">Contoh penulisan matematis</span>
           <div class="mt-4" v-html="mathExplained"></div>
         </div>
       </div>
