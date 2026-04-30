@@ -64,6 +64,9 @@ const updateAll = () => {
   const magA = vecA.length()
   const magB = vecB.length()
 
+  let magnitudoA = Math.sqrt(vectorA.value.x ** 2 + vectorA.value.y ** 2 + vectorA.value.z ** 2)
+  let magnitudoB = Math.sqrt(vectorB.value.x ** 2 + vectorB.value.y ** 2 + vectorB.value.z ** 2)
+
   dotProduct.value = dot.toFixed(0)
 
   if (magA === 0 || magB === 0) {
@@ -120,15 +123,21 @@ const handleResize = () => {
 
 const mathExplained = computed(() => {
   const formula = `
-  \\vec{a}.\\vec{b} = (Ax.Bx)+(Ay.By)+(Az.Bz) \\\\[0.5em]
-  \\vec{a}.\\vec{b} = (${vectorA.value.x} \\times ${vectorB.value.x}) + (${vectorA.value.y} \\times ${vectorB.value.y}) + (${vectorA.value.z} \\times ${vectorB.value.z}) = ${dotProduct.value} \\\\[1.5em]
-
-  |\\vec{a}| = \\sqrt{${vectorA.value.x}^2 + ${vectorA.value.y}^2 + ${vectorA.value.z}^2} = ${Math.sqrt(vectorA.value.x**2 + vectorA.value.y**2 + vectorA.value.z**2).toFixed()} \\\\[0.5em]
-
-  |\\vec{b}| = \\sqrt{${vectorB.value.x}^2 + ${vectorB.value.y}^2 + ${vectorB.value.z}^2} = ${Math.sqrt(vectorB.value.x**2 + vectorB.value.y**2 + vectorB.value.z**2).toFixed()} \\\\[1.5em]
-
-  \\vec{a}.\\vec{b} = |\\vec{a}|.|\\vec{b}| \\cos \\theta \\\\[0.5em]
-  \\cos \\theta = \\frac{\\vec{a}.\\vec{b}}{|\\vec{a}|.|\\vec{b}|} \\\\[0.5em]
+  \\begin{aligned}
+  a \\cdot b &= (a_x \\cdot b_x) + (a_y \\cdot b_y) + (a_z \\cdot b_z) \\\\[0.5em]
+  &= (${vectorA.value.x} \\cdot ${vectorB.value.x}) + (${vectorA.value.y} \\cdot ${vectorB.value.y}) + (${vectorA.value.z} \\cdot ${vectorB.value.z}) \\\\[0.5em]
+  &= ${parseFloat(vectorA.value.x) * parseFloat(vectorB.value.x)} + ${parseFloat(vectorA.value.y) * parseFloat(vectorB.value.y)} + ${parseFloat(vectorA.value.z) * parseFloat(vectorB.value.z)} \\\\[0.5em]
+  &= ${parseFloat(vectorA.value.x) * parseFloat(vectorB.value.x) + parseFloat(vectorA.value.y) * parseFloat(vectorB.value.y) + parseFloat(vectorA.value.z) * parseFloat(vectorB.value.z)} \\\\[1em]
+  
+  |a| \\cdot |b| &= \\sqrt{(${vectorA.value.x})^2 + (${vectorA.value.y})^2 + (${vectorA.value.z})^2} \\cdot \\sqrt{(${vectorB.value.x})^2 + (${vectorB.value.y})^2 + (${vectorB.value.z})^2} \\\\[0.5em]
+  &= \\sqrt{${parseFloat(vectorA.value.x) ** 2} + ${parseFloat(vectorA.value.y) ** 2} + ${parseFloat(vectorA.value.z) ** 2}} \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2} + ${parseFloat(vectorB.value.y) ** 2} + ${parseFloat(vectorB.value.z) ** 2}} \\\\[0.5em]
+  &= \\sqrt{${parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2}} \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2}} \\\\[1.5em]
+  
+  \\cos \\theta &= \\frac{a \\cdot b}{|a||b|} \\\\[1em]
+  &= \\frac{${dotProduct.value}}{\\sqrt{${parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2} } \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2}}} \\\\[1.5em]
+  &= \\frac{${dotProduct.value}}{${(Math.sqrt(parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2) * Math.sqrt(parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2)).toFixed(0)}} \\\\[1em]
+  &= ${(dotProduct.value / (Math.sqrt(parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2) * Math.sqrt(parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2))).toFixed(0)}
+  \\end{aligned}
   `
   return katex.renderToString(formula, {
     displayMode: false,
@@ -160,7 +169,7 @@ onBeforeMount(() => {
         
         <!-- figure -->
         <div class="hidden sm:block lg:col-span-5 py-6">
-          <img src="/public/josiah.png" class="w-full h-auto josiah" alt="">
+          <img src="/public/josiah.webp" class="w-full h-auto josiah" alt="">
         </div>
 
         <!-- description -->
