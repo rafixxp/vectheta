@@ -179,9 +179,7 @@ onBeforeMount(() => {
         <div class="lg:col-span-7">
           <!-- <h1 class="text-2xl font-semibold text-center">Josiah Willard Gibbs</h1> -->
           <p class="text-justify md:text-lg sm:text-xs mt-5">Josiah Willard Gibbs (1839–1903) adalah seorang ilmuwan Amerika yang dikenal sebagai <i>"fathers of thermodynamics"</i> dan <i>"father of vector analysis"</i>. Ia memperkenalkan konsep vektor dan operasi vektor seperti dot product dan cross product dalam karyanya <i>"Elementa de Vector"</i> pada tahun 1881. Karyanya ini menjadi fondasi matematika modern untuk ilmu fisika dan teknik.</p>
-          
           <p class="text-justify md:text-lg sm:text-xs mt-4">Vektor dot product adalah operasi aljabar yang menghasilkan sebuah skalar dengan mengalikan magnitude dua vektor dan kosinus sudut di antara keduanya. Secara grafis, ia merepresentasikan proyeksi satu vektor ke arah vektor lainnya; jika hasilnya positif maka kedua vektor searah, jika nol maka keduanya tegak lurus (ortogonal), dan jika negatif maka keduanya berlawanan arah. Dalam pengembangan web dan grafis komputer, konsep ini sangat krusial untuk menghitung intensitas cahaya (shading), deteksi tabrakan, hingga menentukan orientasi objek dalam ruang 2D atau 3D. </p>
-
           <p class="text-justify md:text-lg sm:text-xs mt-4">Dalam dunia pemrograman modern, dot product digunakan untuk menghitung sudut antara dua vektor, memeriksa apakah vektor saling tegak lurus, serta menghitung proyeksi satu vektor ke arah lainnya. Konsep ini juga menjadi dasar dari algoritma machine learning, khususnya dalam perhitungan similarity antara data.</p>
         </div>
       </div>
