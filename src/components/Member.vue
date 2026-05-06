@@ -8,25 +8,25 @@
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
-                    <img src="/akmal.jpeg" alt="Akmal Rijaludin" class="w-32 h-32 rounded-full object-cover mb-6">
+                    <img src="/akmal.webp" alt="Akmal Rijaludin" class="w-32 h-32 rounded-full object-cover mb-6">
                     <h4 class="text-lg font-semibold text-gray-900 mb-2">Akmal Rijaludin</h4>
                     <p class="text-sm text-gray-500 font-mono">257006111017</p>
                 </div>
                 
                 <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
-                    <img src="/fauzi.jpeg" alt="Fauzi Awaludin Kamal" class="w-32 h-32 rounded-full object-cover mb-6">
+                    <img src="/fauzi.webp" alt="Fauzi Awaludin Kamal" class="w-32 h-32 rounded-full object-cover mb-6">
                     <h4 class="text-lg font-semibold text-gray-900 mb-2">Fauzi Awaludin Kamal</h4>
                     <p class="text-sm text-gray-500 font-mono">257006111017</p>
                 </div>
                 
                 <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
-                    <img src="/nasikha.jpeg" alt="Muhammad Nasikha Rahman" class="w-32 h-32 rounded-full object-cover mb-6">
+                    <img src="/nasikha.webp" alt="Muhammad Nasikha Rahman" class="w-32 h-32 rounded-full object-cover mb-6">
                     <h4 class="text-lg font-semibold text-gray-900 mb-2">Muhammad Nasikha Rahman</h4>
                     <p class="text-sm text-gray-500 font-mono">257006111017</p>
                 </div>
                 
                 <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
-                    <img src="/sami.jpeg" alt="Muhammad Fakhir Sami Wiraatmaja" class="w-32 h-32 rounded-full object-cover mb-6">
+                    <img src="/sami.webp" alt="Muhammad Fakhir Sami Wiraatmaja" class="w-32 h-32 rounded-full object-cover mb-6">
                     <h4 class="text-lg font-semibold text-gray-900 mb-2">Muhammad Fakhir Sami</h4>
                     <p class="text-sm text-gray-500 font-mono">257006111017</p>
                 </div>
@@ -38,7 +38,7 @@
                 </div>
                 
                 <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
-                    <img src="/syayid.jpeg" alt="Syayid Nurul Fadilah" class="w-32 h-32 rounded-full object-cover mb-6">
+                    <img src="/syayid.webp" alt="Syayid Nurul Fadilah" class="w-32 h-32 rounded-full object-cover mb-6">
                     <h4 class="text-lg font-semibold text-gray-900 mb-2">Syayid Nur Fadilah</h4>
                     <p class="text-sm text-gray-500 font-mono">257006111017</p>
                 </div>
