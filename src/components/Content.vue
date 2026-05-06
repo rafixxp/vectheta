@@ -188,14 +188,14 @@ onBeforeMount(() => {
   <section id="main-tool" class="py-24 bg-gradient-to-b from-white to-gray-50">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-16">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Visualisasi</h1>
+        <h1 class="text-4xl md:text-4xl font-bold text-gray-900 mb-4">Visualisasi</h1>
         <p class="text-gray-500 text-lg">Eksplorasi dot product dan sudut antara vektor dalam ruang 3D</p>
       </div>
       
       <div class="grid lg:grid-cols-12 gap-8 lg:gap-12">
         <!-- 3D Visualization -->
         <div class="lg:col-span-7 order-1 lg:order-1">
-          <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-[450px] sm:h-[550px] lg:h-[650px] border border-gray-100">
+          <div class="bg-white rounded-2xl shadow-sm overflow-hidden h-[450px] sm:h-[550px] lg:h-[650px] border border-gray-100">
             <div id="three-container" class="w-full h-full" ref="threeContainer"></div>
           </div>
         </div>
@@ -254,7 +254,7 @@ onBeforeMount(() => {
             </div>
 
             <!-- Result -->
-            <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-6 text-white">
+            <div class="bg-white rounded-2xl p-6 text-dark shadow-sm border border-gray-100">
               <div class="grid grid-cols-2 gap-6">
                 <div>
                   <div class="text-gray-400 text-xs font-medium mb-2 uppercase tracking-wider">Dot Product</div>
