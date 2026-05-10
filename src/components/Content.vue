@@ -122,26 +122,80 @@ const handleResize = () => {
 }
 
 const mathExplained = computed(() => {
-  const formula = `
-  \\begin{aligned}
-  a \\cdot b &= (a_x \\cdot b_x) + (a_y \\cdot b_y) + (a_z \\cdot b_z) \\\\
-  &= (${vectorA.value.x} \\cdot ${vectorB.value.x}) + (${vectorA.value.y} \\cdot ${vectorB.value.y}) + (${vectorA.value.z} \\cdot ${vectorB.value.z}) \\\\
-  &= ${parseFloat(vectorA.value.x) * parseFloat(vectorB.value.x)} + ${parseFloat(vectorA.value.y) * parseFloat(vectorB.value.y)} + ${parseFloat(vectorA.value.z) * parseFloat(vectorB.value.z)} \\\\
-  &= ${parseFloat(vectorA.value.x) * parseFloat(vectorB.value.x) + parseFloat(vectorA.value.y) * parseFloat(vectorB.value.y) + parseFloat(vectorA.value.z) * parseFloat(vectorB.value.z)} \\\\[1em]
+const ax = parseFloat(vectorA.value.x)
+const ay = parseFloat(vectorA.value.y)
+const az = parseFloat(vectorA.value.z)
 
-  |a| \\cdot |b| &=  \\sqrt{ax^2 + ay^2 + az^2} \\cdot \\sqrt{bx^2 + by^2 + bz^2} \\\\
-  &= \\sqrt{(${vectorA.value.x})^2 + (${vectorA.value.y})^2 + (${vectorA.value.z})^2} \\cdot \\sqrt{(${vectorB.value.x})^2 + (${vectorB.value.y})^2 + (${vectorB.value.z})^2} \\\\
-  &= \\sqrt{${parseFloat(vectorA.value.x) ** 2} + ${parseFloat(vectorA.value.y) ** 2} + ${parseFloat(vectorA.value.z) ** 2}} \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2} + ${parseFloat(vectorB.value.y) ** 2} + ${parseFloat(vectorB.value.z) ** 2}} \\\\
-  &= \\sqrt{${parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2}} \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2}} \\\\
-  &= ${Math.sqrt(parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2)} \\cdot ${Math.sqrt(parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2)} \\\\
-  &= ${(Math.sqrt(parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2) * Math.sqrt(parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2))} \\\\[1em]
-  
-  \\cos \\theta &= \\frac{a \\cdot b}{|a||b|} \\\\[1.5em]
-  &= \\frac{${dotProduct.value}}{\\sqrt{${parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2}} \\cdot \\sqrt{${parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2}}} \\\\[1em]
-  &= \\frac{${dotProduct.value}}{${(Math.sqrt(parseFloat(vectorA.value.x) ** 2 + parseFloat(vectorA.value.y) ** 2 + parseFloat(vectorA.value.z) ** 2) * Math.sqrt(parseFloat(vectorB.value.x) ** 2 + parseFloat(vectorB.value.y) ** 2 + parseFloat(vectorB.value.z) ** 2))}}
+const bx = parseFloat(vectorB.value.x)
+const by = parseFloat(vectorB.value.y)
+const bz = parseFloat(vectorB.value.z)
+
+const dot = (ax * bx) + (ay * by) + (az * bz)
+
+const magA = Math.sqrt((ax ** 2) + (ay ** 2) + (az ** 2))
+const magB = Math.sqrt((bx ** 2) + (by ** 2) + (bz ** 2))
+
+const denominator = magA * magB
+
+const cosTheta = dot / denominator
+
+const theta = Math.acos(cosTheta) * (180 / Math.PI)
+
+const formula = `
+  \\begin{aligned}
+
+  \\mathbf{a} \\cdot \\mathbf{b}
+  &= (a_x \\cdot b_x) + (a_y \\cdot b_y) + (a_z \\cdot b_z) \\\\
+
+  &= (${ax} \\cdot ${bx}) + (${ay} \\cdot ${by}) + (${az} \\cdot ${bz}) \\\\
+
+  &= ${(ax * bx)} + ${(ay * by)} + ${(az * bz)} \\\\
+
+  &= ${dot} \\\\[1.5em]
+
+  |\\mathbf{a}|
+  &= \\sqrt{a_x^2 + a_y^2 + a_z^2} \\\\
+
+  &= \\sqrt{(${ax})^2 + (${ay})^2 + (${az})^2} \\\\
+
+  &= \\sqrt{${ax ** 2} + ${ay ** 2} + ${az ** 2}} \\\\
+
+  &= \\sqrt{${(ax ** 2) + (ay ** 2) + (az ** 2)}} \\\\
+
+  &= ${magA.toFixed(4)} \\\\[1.5em]
+
+  |\\mathbf{b}|
+  &= \\sqrt{b_x^2 + b_y^2 + b_z^2} \\\\
+
+  &= \\sqrt{(${bx})^2 + (${by})^2 + (${bz})^2} \\\\
+
+  &= \\sqrt{${bx ** 2} + ${by ** 2} + ${bz ** 2}} \\\\
+
+  &= \\sqrt{${(bx ** 2) + (by ** 2) + (bz ** 2)}} \\\\
+
+  &= ${magB.toFixed(4)} \\\\[1.5em]
+
+  \\cos \\theta
+  &= \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{|\\mathbf{a}||\\mathbf{b}|} \\\\[1em]
+
+  &= \\frac{${dot}}{${magA.toFixed(4)} \\cdot ${magB.toFixed(4)}} \\\\[1em]
+
+  &= \\frac{${dot}}{${denominator.toFixed(4)}} \\\\[1em]
+
+  &= ${cosTheta.toFixed(4)} \\\\[1.5em]
+
+  \\theta
+  &= \\cos^{-1}(${cosTheta.toFixed(4)}) \\\\[1em]
+
+  &= ${theta.toFixed(2)}^\\circ \\\\[1.5em]
+
+  \\therefore
+  \\quad
+  \\theta \\approx ${theta.toFixed(2)}^\\circ
 
   \\end{aligned}
   `
+
   return katex.renderToString(formula, {
     displayMode: false,
     throwOnError: false,

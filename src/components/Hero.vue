@@ -146,7 +146,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="h-screen overflow-hidden relative flex items-center justify-center bg-white">
+  <section class="h-screen overflow-hidden relative flex items-center justify-center bg-white" id="hero">
     <div id="hero-canvas" class="absolute inset-0 z-0"></div>
 
     <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
@@ -161,7 +161,7 @@ onUnmounted(() => {
       </h1>
       
       <p class="text-xl md:text-xl text-black/80 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
-        Eksplorasi dan pahami konsep vektor secara interaktif melalui
+        Eksplorasi dan pahami konsep vektor secara interaktif
       </p>
 
       <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
