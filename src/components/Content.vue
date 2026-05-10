@@ -3,6 +3,7 @@ import { onMounted, onBeforeMount, nextTick, ref, watch, computed } from 'vue'
 import katex from 'katex'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer'
 
 const vectorA = ref({x: 0, y: 0, z: 0})
 const vectorB = ref({x: 0, y: 0, z: 0})
@@ -24,10 +25,10 @@ const init = async () => {
     if (!container) return
   
     scene = new THREE.Scene()
-    scene.background = new THREE.Color(0xffffff)
+    scene.background = new THREE.Color(0x000333)
   
     camera = new THREE.PerspectiveCamera(90, container.clientWidth / container.clientHeight, 0.1, 1000)
-    camera.position.set(8, 4, 6)
+    camera.position.set(10, 10, 10)
   
     renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(container.clientWidth, container.clientHeight)
@@ -37,9 +38,12 @@ const init = async () => {
     controls = new OrbitControls(camera, renderer.domElement)
     controls.enableDamping = true
     controls.dampingFactor = 0.08
+    controls.enablePan = true
+    controls.enableZoom = true
+    controls.autoRotate = false
   
-    scene.add(new THREE.AxesHelper(7))
-    scene.add(new THREE.GridHelper(4, 4, 0x64748b, 0x0efff))
+    scene.add(new THREE.AxesHelper(10))
+    scene.add(new THREE.GridHelper(20, 14, 0x64748b, 0x64748b))
   
     animate()
     updateAll()
@@ -74,7 +78,7 @@ const updateAll = () => {
   } else {
     let cosTheta = dot / (magA * magB)
     cosTheta = Math.max(-1, Math.min(1, cosTheta))
-    angle.value = (Math.acos(cosTheta) * 180 / Math.PI).toFixed(1)
+    angle.value = (Math.acos(cosTheta) * 180 / Math.PI).toFixed(2)
   }
 
   if (!arrowA) {
@@ -122,84 +126,82 @@ const handleResize = () => {
 }
 
 const mathExplained = computed(() => {
-const ax = parseFloat(vectorA.value.x)
-const ay = parseFloat(vectorA.value.y)
-const az = parseFloat(vectorA.value.z)
+  const ax = parseFloat(vectorA.value.x)
+  const ay = parseFloat(vectorA.value.y)
+  const az = parseFloat(vectorA.value.z)
 
-const bx = parseFloat(vectorB.value.x)
-const by = parseFloat(vectorB.value.y)
-const bz = parseFloat(vectorB.value.z)
+  const bx = parseFloat(vectorB.value.x)
+  const by = parseFloat(vectorB.value.y)
+  const bz = parseFloat(vectorB.value.z)
 
-const dot = (ax * bx) + (ay * by) + (az * bz)
+  const dot = (ax * bx) + (ay * by) + (az * bz)
 
-const magA = Math.sqrt((ax ** 2) + (ay ** 2) + (az ** 2))
-const magB = Math.sqrt((bx ** 2) + (by ** 2) + (bz ** 2))
+  const magA = Math.sqrt((ax ** 2) + (ay ** 2) + (az ** 2))
+  const magB = Math.sqrt((bx ** 2) + (by ** 2) + (bz ** 2))
 
-const denominator = magA * magB
+  const denominator = magA * magB
 
-const cosTheta = dot / denominator
+  const cosTheta = dot / denominator
 
-const theta = Math.acos(cosTheta) * (180 / Math.PI)
+  const theta = Math.acos(cosTheta) * (180 / Math.PI)
 
-const formula = `
-  \\begin{aligned}
+  const formula = `
+    \\begin{aligned}
 
-  \\mathbf{a} \\cdot \\mathbf{b}
-  &= (a_x \\cdot b_x) + (a_y \\cdot b_y) + (a_z \\cdot b_z) \\\\
+    \\mathbf{a} \\cdot \\mathbf{b}
+    &= (a_x \\cdot b_x) + (a_y \\cdot b_y) + (a_z \\cdot b_z) \\\\
 
-  &= (${ax} \\cdot ${bx}) + (${ay} \\cdot ${by}) + (${az} \\cdot ${bz}) \\\\
+    &= (${ax} \\cdot ${bx}) + (${ay} \\cdot ${by}) + (${az} \\cdot ${bz}) \\\\
 
-  &= ${(ax * bx)} + ${(ay * by)} + ${(az * bz)} \\\\
+    &= ${(ax * bx)} + ${(ay * by)} + ${(az * bz)} \\\\
 
-  &= ${dot} \\\\[1.5em]
+    &= ${dot} \\\\[1.5em]
 
-  |\\mathbf{a}|
-  &= \\sqrt{a_x^2 + a_y^2 + a_z^2} \\\\
+    |\\mathbf{a}|
+    &= \\sqrt{a_x^2 + a_y^2 + a_z^2} \\\\
 
-  &= \\sqrt{(${ax})^2 + (${ay})^2 + (${az})^2} \\\\
+    &= \\sqrt{(${ax})^2 + (${ay})^2 + (${az})^2} \\\\
 
-  &= \\sqrt{${ax ** 2} + ${ay ** 2} + ${az ** 2}} \\\\
+    &= \\sqrt{${ax ** 2} + ${ay ** 2} + ${az ** 2}} \\\\
 
-  &= \\sqrt{${(ax ** 2) + (ay ** 2) + (az ** 2)}} \\\\
+    &= \\sqrt{${(ax ** 2) + (ay ** 2) + (az ** 2)}} \\\\
 
-  &= ${magA.toFixed(4)} \\\\[1.5em]
+    &= ${magA.toFixed(4)} \\\\[1.5em]
 
-  |\\mathbf{b}|
-  &= \\sqrt{b_x^2 + b_y^2 + b_z^2} \\\\
+    |\\mathbf{b}|
+    &= \\sqrt{b_x^2 + b_y^2 + b_z^2} \\\\
 
-  &= \\sqrt{(${bx})^2 + (${by})^2 + (${bz})^2} \\\\
+    &= \\sqrt{(${bx})^2 + (${by})^2 + (${bz})^2} \\\\
 
-  &= \\sqrt{${bx ** 2} + ${by ** 2} + ${bz ** 2}} \\\\
+    &= \\sqrt{${bx ** 2} + ${by ** 2} + ${bz ** 2}} \\\\
 
-  &= \\sqrt{${(bx ** 2) + (by ** 2) + (bz ** 2)}} \\\\
+    &= \\sqrt{${(bx ** 2) + (by ** 2) + (bz ** 2)}} \\\\
 
-  &= ${magB.toFixed(4)} \\\\[1.5em]
+    &= ${magB.toFixed(4)} \\\\[1.5em]
 
-  \\cos \\theta
-  &= \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{|\\mathbf{a}||\\mathbf{b}|} \\\\[1em]
+    \\cos \\theta
+    &= \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{|\\mathbf{a}||\\mathbf{b}|} \\\\[1em]
 
-  &= \\frac{${dot}}{${magA.toFixed(4)} \\cdot ${magB.toFixed(4)}} \\\\[1em]
+    &= \\frac{${dot}}{${magA.toFixed(4)} \\cdot ${magB.toFixed(4)}} \\\\[1em]
 
-  &= \\frac{${dot}}{${denominator.toFixed(4)}} \\\\[1em]
+    &= \\frac{${dot}}{${denominator.toFixed(4)}} \\\\[1em]
 
-  &= ${cosTheta.toFixed(4)} \\\\[1.5em]
+    &= ${cosTheta.toFixed(4)} \\\\[1.5em]
 
-  \\theta
-  &= \\cos^{-1}(${cosTheta.toFixed(4)}) \\\\[1em]
+    \\theta
+    &= \\cos^{-1}(${cosTheta.toFixed(4)}) \\\\[1em]
 
-  &= ${theta.toFixed(2)}^\\circ \\\\[1.5em]
+    &= ${theta.toFixed(2)}^\\circ \\\\[1.5em]
 
-  \\therefore
-  \\quad
-  \\theta \\approx ${theta.toFixed(2)}^\\circ
+    \\theta \\approx ${theta.toFixed(2)}^\\circ
 
-  \\end{aligned}
-  `
+    \\end{aligned}
+    `
 
-  return katex.renderToString(formula, {
-    displayMode: false,
-    throwOnError: false,
-  })
+    return katex.renderToString(formula, {
+      displayMode: false,
+      throwOnError: false,
+    })
 })
 
 watch([vectorA, vectorB], updateAll, { deep: true })

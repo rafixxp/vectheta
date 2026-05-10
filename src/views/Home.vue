@@ -13,3 +13,7 @@ import Member from '../components/Member.vue'
   <Content />
   <Footer />
 </template>
+
+<style scoped>
+
+</style>
